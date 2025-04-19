@@ -35,7 +35,7 @@ public class JDBCUserRepository extends BasicRepository implements UserRepositor
 
     @Override
     public void update(User user) throws SQLException {
-        var sql = "insert into users (username, password, email) values (?, ?, ?) where id = ?";
+        var sql = "update users set username = ?, password = ?, email = ? where id = ?";
 
         try (var connection = getConnection();
              var stmt = connection.prepareStatement(sql)) {
