@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.vsu.projectmanagement.exception.EntityNotFoundException;
 import ru.vsu.projectmanagement.repository.JDBCUserRepository;
 import ru.vsu.projectmanagement.service.UserService;
 
@@ -27,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
@@ -37,7 +38,13 @@ public class LoginServlet extends HttpServlet {
             var session = req.getSession();
             session.setAttribute("userId", userId);
             resp.sendRedirect(req.getContextPath() + "/profile");
-        } catch (Exception e) {
+        }
+        catch (EntityNotFoundException e){
+            req.setAttribute("error", "Неверный email или пароль");
+            req.getRequestDispatcher("/WEB-INF/views/login.jsp")
+                    .forward(req, resp);
+        }
+        catch (Exception e) {
             throw new ServletException(e);
         }
     }
