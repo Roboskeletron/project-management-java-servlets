@@ -1,59 +1,29 @@
 package ru.vsu.projectmanagement.domain;
 
+import java.time.OffsetDateTime;
+
 public class Project {
-    private int id;
+    private long id;
     private String name;
     private String description;
-    private int ownerId;
-    private String prefix;
+    private long ownerId; // Foreign key to User
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 
-    public Project() {}
-
-    public Project(int id, String name, String description, int ownerId, String prefix) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.ownerId = ownerId;
-        this.prefix = prefix;
+    public Project() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
+    // Constructor, getters, and setters
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public long getOwnerId() { return ownerId; }
+    public void setOwnerId(long ownerId) { this.ownerId = ownerId; }
+    public OffsetDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public OffsetDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; }
 }

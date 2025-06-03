@@ -3,17 +3,40 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
-    <display-name>ProjectManagement</display-name>
-    <absolute-ordering/>
+
+    <display-name>Task Tracker Application</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- AppContextListener is registered via @WebListener -->
+    <!-- Servlets are registered via @WebServlet -->
+
+    <!-- Optional: Error pages -->
+    <!--
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/jsp/error/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/jsp/error/generalError.jsp</location>
+    </error-page>
+    -->
+
+    <!-- Ensure UTF-8 encoding for requests -->
     <filter>
-        <filter-name>ExceptionFilter</filter-name>
-        <filter-class>ru.vsu.projectmanagement.filter.ExceptionFilter</filter-class>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>ru.vsu.projectmanagement.servlet.filter.CharacterEncodingFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>ExceptionFilter</filter-name>
+        <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
 </web-app>
