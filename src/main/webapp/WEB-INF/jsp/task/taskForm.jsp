@@ -33,7 +33,7 @@
       <div class="col-md-6 mb-3">
         <label for="status" class="form-label">Статус:</label>
         <select class="form-select" id="status" name="status">
-          <c:forEach var="s" items="${applicationScope.TaskStatus.values()}">
+          <c:forEach var="s" items="${applicationScope.TaskStatus}">
             <option value="${s.dbValue}" ${task.status == s ? 'selected' : ''}>${s.dbValue}</option>
           </c:forEach>
         </select>
@@ -41,7 +41,7 @@
       <div class="col-md-6 mb-3">
         <label for="priority" class="form-label">Приоритет:</label>
         <select class="form-select" id="priority" name="priority">
-          <c:forEach var="p" items="${applicationScope.TaskPriority.values()}">
+          <c:forEach var="p" items="${applicationScope.TaskPriority}">
             <option value="${p.dbValue}" ${task.priority == p ? 'selected' : ''}>${p.dbValue}</option>
           </c:forEach>
         </select>
@@ -60,8 +60,7 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="dueDate" class="form-label">Срок выполнения:</label>
-        <input type="date" class="form-control" id="dueDate" name="dueDate"
-               value="<c:if test='${not empty task.dueDate}'><fmt:formatDate value='${task.dueDate}' pattern='yyyy-MM-dd'/></c:if>">
+        <input type="date" class="form-control" id="dueDate" name="dueDate" value="${task.dueDateForInput}">
       </div>
     </div>
 

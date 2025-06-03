@@ -20,9 +20,9 @@ public class AppContextListener implements ServletContextListener {
             ctx.setAttribute("taskHistoryService", appContext.taskHistoryService());
 
             // For JSPs to access enum values easily
-            ctx.setAttribute("UserRole", ru.vsu.projectmanagement.domain.UserRole.class);
-            ctx.setAttribute("TaskStatus", ru.vsu.projectmanagement.domain.TaskStatus.class);
-            ctx.setAttribute("TaskPriority", ru.vsu.projectmanagement.domain.TaskPriority.class);
+            ctx.setAttribute("UserRole", ru.vsu.projectmanagement.domain.UserRole.values());
+            ctx.setAttribute("TaskStatus", ru.vsu.projectmanagement.domain.TaskStatus.values());
+            ctx.setAttribute("TaskPriority", ru.vsu.projectmanagement.domain.TaskPriority.values());
 
             ctx.log("AppContextListener initialization successful: TaskTracker services loaded.");
         } catch (Exception ex) {

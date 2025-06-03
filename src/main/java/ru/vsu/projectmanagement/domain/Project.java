@@ -1,6 +1,7 @@
 package ru.vsu.projectmanagement.domain;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Project {
     private long id;
@@ -9,6 +10,8 @@ public class Project {
     private long ownerId; // Foreign key to User
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
+
+    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public Project() {
     }
@@ -26,4 +29,18 @@ public class Project {
     public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
     public OffsetDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getFormattedCreatedAt() {
+        if (this.createdAt == null) {
+            return "";
+        }
+        return this.createdAt.format(DT_FORMATTER);
+    }
+
+    public String getFormattedUpdatedAt() {
+        if (this.updatedAt == null) {
+            return "";
+        }
+        return this.updatedAt.format(DT_FORMATTER);
+    }
 }

@@ -2,6 +2,7 @@ package ru.vsu.projectmanagement.domain;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     private long id;
@@ -20,6 +21,10 @@ public class Task {
     private String projectName;
     private String assigneeName;
     private String reporterName;
+
+    private static final DateTimeFormatter OFFSET_DT_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private static final DateTimeFormatter LOCAL_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static final DateTimeFormatter ISO_LOCAL_DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
 
     public Task() {
@@ -55,4 +60,32 @@ public class Task {
     public void setAssigneeName(String assigneeName) { this.assigneeName = assigneeName; }
     public String getReporterName() { return reporterName; }
     public void setReporterName(String reporterName) { this.reporterName = reporterName; }
+
+    public String getFormattedDueDate() {
+        if (this.dueDate == null) {
+            return "";
+        }
+        return this.dueDate.format(LOCAL_DATE_FORMATTER);
+    }
+
+    public String getDueDateForInput() {
+        if (this.dueDate == null) {
+            return "";
+        }
+        return this.dueDate.format(ISO_LOCAL_DATE_FORMATTER);
+    }
+
+    public String getFormattedCreatedAt() {
+        if (this.createdAt == null) {
+            return "";
+        }
+        return this.createdAt.format(OFFSET_DT_FORMATTER);
+    }
+
+    public String getFormattedUpdatedAt() {
+        if (this.updatedAt == null) {
+            return "";
+        }
+        return this.updatedAt.format(OFFSET_DT_FORMATTER);
+    }
 }

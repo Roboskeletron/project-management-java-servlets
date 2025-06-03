@@ -70,6 +70,9 @@ public class ReflectiveMapper {
         } else if (targetType == java.time.OffsetDateTime.class && value instanceof java.sql.Timestamp) {
             java.sql.Timestamp ts = (java.sql.Timestamp) value;
             return ts.toInstant().atOffset(java.time.ZoneOffset.UTC);
+        } else if (targetType == java.time.LocalDate.class &&  value instanceof java.sql.Date) {
+            java.sql.Date d = (java.sql.Date) value;
+            return d.toLocalDate();
         }
         return value;
     }

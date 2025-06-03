@@ -21,9 +21,7 @@
   </div>
   <p><strong>Описание:</strong> <c:out value="${project.description}"/></p>
   <p><strong>Владелец ID:</strong> ${project.ownerId}</p>
-  <p><strong>Дата создания:</strong>
-    <fmt:formatDate value="${project.createdAt}" pattern="dd.MM.yyyy HH:mm" />
-  </p>
+  <p><strong>Дата создания:</strong> ${project.formattedCreatedAt}</p>
   <c:if test="${not empty param.taskDeleted}">
     <div class="alert alert-success">Задача успешно удалена.</div>
   </c:if>
@@ -55,11 +53,7 @@
             <td><span class="badge bg-${task.status.dbValue == 'DONE' ? 'success' : (task.status.dbValue == 'IN_PROGRESS' ? 'primary' : 'secondary')}">${task.status.dbValue}</span></td>
             <td><span class="badge bg-${task.priority.dbValue == 'URGENT' ? 'danger' : (task.priority.dbValue == 'HIGH' ? 'warning' : 'info')}">${task.priority.dbValue}</span></td>
             <td>${not empty task.assigneeName ? task.assigneeName : 'Не назначен'}</td>
-            <td>
-              <c:if test="${not empty task.dueDate}">
-                <fmt:formatDate value="${task.dueDate}" pattern="dd.MM.yyyy" />
-              </c:if>
-            </td>
+            <td>${task.formattedDueDate}</td>
             <td>
               <a href="${pageContext.request.contextPath}/task/view?id=${task.id}" class="btn btn-sm btn-outline-info">Детали</a>
               <c:if test="${task.reporterId == sessionScope.currentUser.id || (task.assigneeId != null && task.assigneeId == sessionScope.currentUser.id) || sessionScope.currentUser.role == 'ADMIN'}">

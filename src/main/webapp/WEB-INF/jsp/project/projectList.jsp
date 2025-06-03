@@ -43,7 +43,7 @@
             <td><c:out value="${project.description}" escapeXml="true"/></td>
             <td>${project.ownerId}</td>
             <td>
-              <fmt:formatDate value="${project.createdAt}" pattern="dd.MM.yyyy HH:mm" />
+                ${project.formattedCreatedAt}
             </td>
             <td>
               <a href="${pageContext.request.contextPath}/project/view?id=${project.id}" class="btn btn-sm btn-info">Открыть</a>

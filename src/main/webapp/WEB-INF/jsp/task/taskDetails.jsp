@@ -30,7 +30,7 @@
         <div class="col-md-4"><strong>Статус:</strong> <span class="badge bg-${task.status.dbValue == 'DONE' ? 'success' : (task.status.dbValue == 'IN_PROGRESS' ? 'primary' : 'secondary')}">${task.status.dbValue}</span></div>
         <div class="col-md-4"><strong>Приоритет:</strong> <span class="badge bg-${task.priority.dbValue == 'URGENT' ? 'danger' : (task.priority.dbValue == 'HIGH' ? 'warning' : 'info')}">${task.priority.dbValue}</span></div>
         <div class="col-md-4"><strong>Срок:</strong>
-          <c:if test="${not empty task.dueDate}"><fmt:formatDate value="${task.dueDate}" pattern="dd.MM.yyyy" /></c:if>
+          <c:if test="${not empty task.dueDate}">${task.formattedDueDate}</c:if>
           <c:if test="${empty task.dueDate}">Не установлен</c:if>
         </div>
       </div>
@@ -39,8 +39,8 @@
         <div class="col-md-6"><strong>Исполнитель:</strong> ${not empty task.assigneeName ? task.assigneeName : 'Не назначен'}</div>
       </div>
       <div class="row mt-2">
-        <div class="col-md-6"><strong>Создана:</strong> <fmt:formatDate value="${task.createdAt}" pattern="dd.MM.yyyy HH:mm" /></div>
-        <div class="col-md-6"><strong>Обновлена:</strong> <fmt:formatDate value="${task.updatedAt}" pattern="dd.MM.yyyy HH:mm" /></div>
+        <div class="col-md-6"><strong>Создана:</strong> ${task.formattedCreatedAt}</div>
+        <div class="col-md-6"><strong>Обновлена:</strong> ${task.formattedUpdatedAt}</div>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
       <c:forEach var="comment" items="${comments}">
         <div class="mb-2 p-2 border rounded">
           <strong>${comment.username}</strong>
-          (<fmt:parseDate value="${comment.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ssXXX" var="commentDate" type="both" /><fmt:formatDate value="${commentDate}" pattern="dd.MM.yyyy HH:mm" />):
+          (${comment.formattedCreatedAt}):
           <p style="white-space: pre-wrap;"><c:out value="${comment.content}"/></p>
             <%-- Optional: Delete comment button --%>
         </div>
@@ -87,8 +87,7 @@
       <c:forEach var="entry" items="${history}">
         <li class="list-group-item">
           <strong>${entry.username}</strong>
-          <fmt:parseDate value="${entry.changedAt}" pattern="yyyy-MM-dd'T'HH:mm:ssXXX" var="histDate" type="both" />
-          (<fmt:formatDate value="${histDate}" pattern="dd.MM.yyyy HH:mm" />)
+          (${entry.formattedChangedAt})
           изменил(а) поле <em>"${entry.fieldChanged}"</em>
           <c:if test="${not empty entry.oldValue}">с "${entry.oldValue}"</c:if>
           на "${entry.newValue}".

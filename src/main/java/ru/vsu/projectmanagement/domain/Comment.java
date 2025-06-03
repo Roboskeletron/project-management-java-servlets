@@ -1,6 +1,7 @@
 package ru.vsu.projectmanagement.domain;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Comment {
     private long id;
@@ -11,6 +12,8 @@ public class Comment {
 
     // Optional: Fields for joined data
     private String username;
+
+    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 
     public Comment() {
@@ -29,4 +32,11 @@ public class Comment {
     public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
+
+    public String getFormattedCreatedAt() {
+        if (this.createdAt == null) {
+            return "";
+        }
+        return this.createdAt.format(DT_FORMATTER);
+    }
 }

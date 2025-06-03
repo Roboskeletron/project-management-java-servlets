@@ -1,6 +1,7 @@
 package ru.vsu.projectmanagement.domain;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TaskHistory {
     private long id;
@@ -13,6 +14,8 @@ public class TaskHistory {
 
     // Optional: Fields for joined data
     private String username; // User who made the change
+
+    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public TaskHistory() {
     }
@@ -34,4 +37,11 @@ public class TaskHistory {
     public void setChangedAt(OffsetDateTime changedAt) { this.changedAt = changedAt; }
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
+
+    public String getFormattedChangedAt() {
+        if (this.changedAt == null) {
+            return "";
+        }
+        return this.changedAt.format(DT_FORMATTER);
+    }
 }
